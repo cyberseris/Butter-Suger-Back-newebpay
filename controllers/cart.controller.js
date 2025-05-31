@@ -291,8 +291,7 @@ const cartController = {
                 ItemDesc: course_ids,
                 timestamp,
                 Amt: summaryItems.total_price,
-                MerchantOrderNo: timestamp,
-                course_ids
+                MerchantOrderNo: timestamp
             }
         
             console.log("==============checkout order=============")
