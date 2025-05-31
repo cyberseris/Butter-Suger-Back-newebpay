@@ -17,10 +17,10 @@ router.post('/merge', ...handleMiddleware([isAuth], cartController.mergeCartItem
 router.post('/checkout', ...handleMiddleware([isAuth], cartController.checkout))
 
 //結帳成功
-router.post('/api/v1/cart/newebpay_Return', cartController.newebpayReturn)
+router.post('/api/v1/cart/newebpay_return', cartController.newebpayReturn)
 
 //確認交易
-router.post('/api/v1/cart/newebpay_Notify', cartController.newebpayNotify)
+router.post('/api/v1/cart/newebpay_notify', cartController.newebpayNotify)
 
 // 取得購物車資料
 router.delete('/:cartItemId', ...handleMiddleware([isAuth], cartController.deleteCartItems))
