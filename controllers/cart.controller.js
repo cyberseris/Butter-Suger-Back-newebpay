@@ -284,14 +284,14 @@ const cartController = {
             const summaryItems = await summaryCartItems(cartItemsRepo, cart_id) || { item_count: 0, total_price: 0 }
 
             console.log("==============checkout1=============")
-            const timestamp = Math.round(new Date().getTime()/1000)
+            const TimeStamp = Math.round(new Date().getTime()/1000)
             
             const order = {
                 Email: email,
-                ItemDesc: course_ids,
-                timestamp,
+                ItemDesc: course_ids.join(','),
+                TimeStamp,
                 Amt: summaryItems.total_price,
-                MerchantOrderNo: timestamp
+                MerchantOrderNo: TimeStamp
             }
         
             console.log("==============checkout order=============")
@@ -323,8 +323,8 @@ const cartController = {
             const newOrder = orderRepo.create({
                 user_id: user_id,
                 coupon_id: coupon_id, //escapeHtml.escape(coupon_id)
-                discount_amount: Number(discount_amount),  //escapeHtml.escape(discount_amount)
-                final_amount: summaryItems.total_price - Number(discount_amount), //escapeHtml.escape(discount_amount)
+                discount_amount: Number(discount_amount)||0,  //escapeHtml.escape(discount_amount)
+                final_amount: summaryItems.total_price - (Number(discount_amount)||0), //escapeHtml.escape(discount_amount)
                 order_number: String(order.MerchantOrderNo),
                 payment_status: 'pending',
                 pay_trade_no: '',

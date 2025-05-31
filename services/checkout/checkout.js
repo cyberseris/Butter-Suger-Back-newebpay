@@ -27,7 +27,7 @@ function createAesEncrypt(TradeInfo) {
 }
 
 function createShaEncrypt(aesEncrypt) {
-  const plainText = `HashKey=${HASHKEY}&${aesEncrypt}&HashIV=${HASHIV}`;
+  const plainText = `HashKey=${HASHKEY}&TradeInfo=${aesEncrypt}&HashIV=${HASHIV}`;
   const sha = crypto.createHash('sha256');
   return sha.update(plainText).digest('hex').toUpperCase();
 }
