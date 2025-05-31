@@ -1,0 +1,47 @@
+const dotenv = require('dotenv')
+
+const result = dotenv.config()
+const db = require('./db')
+const web = require('./web')
+const s3 = require('./s3Client')
+const newebpay = require('./newebpay')
+
+if (result.error) {
+  console.warn('[Warning] .env file not found, using environment variables from process.env')
+}
+
+const config = {
+  db,
+  web,  
+  newebpay,
+  s3: {
+    bucketName: process.env.AWS_S3_BUCKET_NAME,
+    region: process.env.AWS_REGION,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    cloudfrontUrl: process.env.AWS_CLOUDFRONT_URL,
+  },
+  secret: {
+    jwtSecret: process.env.JWT_SECRET,
+    jwtExpiresDay: process.env.JWT_EXPIRES_DAY,
+  },
+}
+
+class ConfigManager {
+  static get(path) {
+    if (!path || typeof path !== 'string') {
+      throw new Error(`incorrect path: ${path}`)
+    }
+    const keys = path.split('.')
+    let configValue = config
+    keys.forEach((key) => {
+      if (!Object.prototype.hasOwnProperty.call(configValue, key)) {
+        throw new Error(`config ${path} not found`)
+      }
+      configValue = configValue[key]
+    })
+    return configValue
+  }
+}
+
+module.exports = ConfigManager
