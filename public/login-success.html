@@ -27,12 +27,16 @@
             var url = new URL(getUrlString);
             const token = url.searchParams.get('token')
 
+            console.log("================token===============")
+            console.log(token)
+            console.log("================token===============")
+
             const coupon_id = document.getElementById("coupon_id").value
             const coupon = document.getElementById("coupon").value
             const discount_amount = document.getElementById("discount_amount").value
 
             try{
-                const res = await axios.post('https://butter-sugar.zeabur.app/api/v1/cart/checkout', { coupon_id: coupon_id, coupon:coupon, discount_amount: discount_amount}, {
+                const res = await axios.post('http://butter-sugar.zeabur.app/api/v1/cart/checkout', { coupon_id: coupon_id, coupon:coupon, discount_amount: discount_amount}, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -41,6 +45,7 @@
                 let redirect = document.getElementById('wrapper')
                 redirect.innerHTML = res.data
                 
+                console.log(res.data)
                 setTimeout(() => {
                     document.forms[0].submit();
                 }, 0);
