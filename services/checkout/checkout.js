@@ -1,55 +1,47 @@
 const crypto = require('crypto');
-const config = require('../../config/index')
+const config = require('../../config/index');
 
-const HASHKEY = config.get('newebpay.HASHKEY')
-const HASHIV = config.get('newebpay.HASHIV')
-const MerchantID = config.get('newebpay.MerchantID')
-const Version = config.get('newebpay.Version')
-const NotifyUrl = config.get('newebpay.NotifyUrl')
-const ReturnUrl = config.get('newebpay.ReturnUrl')
+function padToLength(str, len) {
+  return str.padEnd(len, '\0');
+}
+
+const HASHKEY = config.get('newebpay.HASHKEY');
+const HASHIV = config.get('newebpay.HASHIV');
+const HASHKEY_32 = padToLength(HASHKEY, 32);
+const HASHIV_16 = padToLength(HASHIV, 16);
+const MerchantID = config.get('newebpay.MerchantID');
+const Version = config.get('newebpay.Version');
+const NotifyUrl = config.get('newebpay.NotifyUrl');
+const ReturnUrl = config.get('newebpay.ReturnUrl');
 const RespondType = 'JSON';
 
 function genDataChain(order) {
-    console.log("===========genDataChain============")
-    return `MerchantID=${MerchantID}&TimeStamp=${
-      order.TimeStamp
-    }&Version=${Version}&RespondType=${RespondType}&MerchantOrderNo=${
-      order.MerchantOrderNo
-    }&Amt=${order.Amt}&NotifyURL=${encodeURIComponent(
-      NotifyUrl,
-    )}&ReturnURL=${encodeURIComponent(ReturnUrl)}&ItemDesc=${encodeURIComponent(
-      order.ItemDesc,
-    )}&Email=${encodeURIComponent(order.Email)}`;
-  }
+  return `MerchantID=${MerchantID}&TimeStamp=${order.TimeStamp}&Version=${Version}&RespondType=${RespondType}&MerchantOrderNo=${order.MerchantOrderNo}&Amt=${order.Amt}&NotifyURL=${encodeURIComponent(NotifyUrl)}&ReturnURL=${encodeURIComponent(ReturnUrl)}&ItemDesc=${encodeURIComponent(order.ItemDesc)}&Email=${encodeURIComponent(order.Email)}`;
+}
 
 function createAesEncrypt(TradeInfo) {
-    console.log("===========TradeInfo============")
-    const encrypt = crypto.createCipheriv('aes256', HASHKEY, HASHIV);
-    const enc = encrypt.update(genDataChain(TradeInfo), 'utf8', 'hex');
-    return enc + encrypt.final('hex');
+  const encrypt = crypto.createCipheriv('aes-256-cbc', HASHKEY_32, HASHIV_16);
+  let enc = encrypt.update(genDataChain(TradeInfo), 'utf8', 'hex');
+  enc += encrypt.final('hex');
+  return enc;
 }
 
 function createShaEncrypt(aesEncrypt) {
-    console.log("===========aesEncrypt============")
-    const sha = crypto.createHash('sha256');
-    const plainText = `HashKey=${HASHKEY}&${aesEncrypt}&HashIV=${HASHIV}`;
-    return sha.update(plainText).digest('hex').toUpperCase();
+  const plainText = `HashKey=${HASHKEY}&${aesEncrypt}&HashIV=${HASHIV}`;
+  const sha = crypto.createHash('sha256');
+  return sha.update(plainText).digest('hex').toUpperCase();
 }
 
-//AES 解密
 function createAesDecrypt(TradeInfo) {
-    console.log("===========TradeInfo============")
-    const decrypt = crypto.createDecipheriv('aes256', HASHKEY, HASHIV);
-    decrypt.setAutoPadding(false);
-    const text = decrypt.update(TradeInfo, 'hex', 'utf8');
-    const plainText = text + decrypt.final('utf8');
-    const result = plainText.replace(/[\x00-\x20]+/g, '');
-    return JSON.parse(result);
+  const decrypt = crypto.createDecipheriv('aes-256-cbc', HASHKEY_32, HASHIV_16);
+  let text = decrypt.update(TradeInfo, 'hex', 'utf8');
+  text += decrypt.final('utf8');
+  return JSON.parse(text);
 }
 
 module.exports = {
-    genDataChain,
-    createAesEncrypt,
-    createShaEncrypt,
-    createAesDecrypt
-}
+  genDataChain,
+  createAesEncrypt,
+  createShaEncrypt,
+  createAesDecrypt
+};
