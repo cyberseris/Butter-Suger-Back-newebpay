@@ -339,7 +339,7 @@ const cartController = {
                         <input type="text" name="MerchantID" value="${MerchantID}" />
                         <input type="text" name="TradeSha" value="${shaEncrypt}" />
                         <input type="text" name="TradeInfo" value="${aesEncrypt}" />
-                        <input type="text" name="TimeStamp" value="${timestamp}" />
+                        <input type="text" name="TimeStamp" value="${TimeStamp}" />
                         <input type="text" name="Version" value="${Version}" />
                         <input type="text" name="NotifyUrl" value="${NotifyUrl}" />
                         <input type="text" name="ReturnUrl" value="${ReturnUrl}" />
