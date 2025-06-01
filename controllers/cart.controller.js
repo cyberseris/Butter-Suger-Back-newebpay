@@ -345,6 +345,10 @@ const cartController = {
             const newOrderItem = orderItemRepo.create(insertOrderItems)
             const orderItemResult = await orderItemRepo.save(newOrderItem)
             
+            await cartItemsRepo.delete({cart_id: cart_id})   
+            await cartsRepo.delete({id: cart_id})
+
+
             console.log("===============orderItemResult===============")
             console.log(orderItemResult)
             console.log("===============orderItemResult===============")
