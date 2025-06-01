@@ -397,7 +397,7 @@ const cartController = {
         const order_id = findOrder.id
 
         const orderItemRepo = dataSource.getRepository('order_item')
-        const result = await orderItemRepo.cartItemsRepo.createQueryBuilder('orderItem')
+        const result = await orderItemRepo.createQueryBuilder('orderItem')
         .select(['COUNT(*)::int AS item_count',
                 'course.course_smallimage AS course_smallimage',
                 'course.course_name AS course_name',
