@@ -2,13 +2,13 @@ const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 const userController = require('../controllers/user.controller')
+const orderController = require('../controllers/order.controller')
 const isAuth = require('../middleware/isAuth.middleware')
 const validateSchema = require('../middleware/validateSchema.middleware')
 const { updateUserSchema } = require('../schema/user.schema')
 const handleMiddleware = require('../utils/handleMiddleware')
 const multer = require('multer');
 const upload = multer();
-
 
 router.get(
   '/auth/google',
@@ -38,5 +38,8 @@ router.patch(
   '/update',
   ...handleMiddleware([upload.single('file'), isAuth, validateSchema(updateUserSchema), userController.updateUserData])
 )
+
+// 取得所有訂單
+router.get('/orders', ...handleMiddleware([isAuth], orderController.getOrderList))
 
 module.exports = router
