@@ -395,10 +395,13 @@ const cartController = {
         )
 
         const order_id = findOrder.id
+        console.log("============newebpayReturn data findOrder============")
+        console.log(findOrder)
+        console.log("============newebpayReturn data findOrder============")
 
         const orderItemRepo = dataSource.getRepository('order_item')
-        const orderItems = await orderItemRepo.find({ order_id:order_id })
-        const item_count = orderItems.length
+        const item_count = await orderItemRepo.count({ order_id:order_id })
+/*         const item_count = orderItems.length */
         const result = await orderItemRepo.createQueryBuilder('orderItem')
         .select([
             'course.course_smallimage AS course_smallimage',
@@ -416,7 +419,7 @@ const cartController = {
         return res.status(200).json({
             status:true,
             message: "結帳成功",
-            daya: {
+            data: {
                     "payway": data.Result.PaymentType,
                     "final_amount": data.Result.Amt,
                     "payment_status": data.status,
