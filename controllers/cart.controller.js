@@ -397,33 +397,17 @@ const cartController = {
         const order_id = findOrder.id
 
         const orderItemRepo = dataSource.getRepository('order_item')
+        const orderItems = await orderItemRepo.find({ order_id:order_id })
+        const item_count = orderItems.length
         const result = await orderItemRepo.createQueryBuilder('orderItem')
         .select([
-            'COUNT(*)::int AS item_count',
             'course.course_smallimage AS course_smallimage',
             'course.course_name AS course_name',
             'orderItem.price AS price'
         ])
         .leftJoin('orderItem.courses', 'course')
         .where('orderItem.order_id = :order_id', { order_id }) // <-- 這裡
-        .groupBy('course.course_smallimage')
-        .addGroupBy('course.course_name')
-        .addGroupBy('orderItem.price')  // 建議 group by price，不然報錯
         .getRawMany()
-
-/*         const orderItemRepo = dataSource.getRepository('order_item')
-        const result = await orderItemRepo.createQueryBuilder('orderItem')
-        .select(['COUNT(*)::int AS item_count',
-                'course.course_smallimage AS course_smallimage',
-                'course.course_name AS course_name',
-                'course.sell_price AS price'
-                ])
-        .leftJoin('orderItem.courses', 'course')
-        .where('orderItem.id = :order_id', {order_id})
-        .groupBy('course.course_smallimage')
-        .addGroupBy('course.course_name')
-        .addGroupBy('course.sell_price')
-        .getRawMany() */
 
         console.log("================newebpayReturn result return==================")
         console.log(result)
@@ -432,7 +416,15 @@ const cartController = {
         return res.status(200).json({
             status:true,
             message: "結帳成功",
-            daya: result
+            daya: {
+                    "payway": data.Result.PaymentType,
+                    "final_amount": data.Result.Amt,
+                    "payment_status": data.status,
+                    "payment_date": data.Result.PayTime,
+                    "order_number": data.Result.MerchantOrderNo,
+                    "order_items": result,
+                    "item_count": item_count
+                }
         })
     },
     async newebpayNotify(req, res, next){
