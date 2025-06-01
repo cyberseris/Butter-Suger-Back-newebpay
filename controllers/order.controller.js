@@ -16,6 +16,33 @@ const orderController = {
     async getOrderList(req, res, next){
         const user_id = req.user.id
         
+        const orderItemRepo = dataSource.getRepository('order_item')
+        const result = await orderItemRepo.createQueryBuilder('orderItem')
+        .select([
+            'order.order_number AS order_number', 
+            'array_agg(course.course_name) AS course_name', 
+            'order.final_amount AS final_amount', 
+            'order.created_at AS created_at'])
+        .leftJoin('orderItem.order', 'order')
+        .leftJoin('orderItem.courses', 'course')
+        .where('order.user_id = :user_id', {user_id})
+        .groupBy('order.order_number')
+        .addGroupBy('order.final_amount')
+        .addGroupBy('order.created_at')
+        .getRawMany()
+
+        return res.status(200).json({
+            status: true,
+            message: "成功取得訂單",
+            data: result
+        })
+    },
+
+
+
+/*     async getOrderList(req, res, next){
+        const user_id = req.user.id
+        
         const orderRepo = dataSource.getRepository('order')
         const findOrder = await orderRepo.find({
             select: ['id', 'order_number', 'final_amount', 'created_at'],
@@ -60,7 +87,7 @@ const orderController = {
                 created_at: findOrder.created_at
             }
         })
-    },
+    }, */
 }
 
 module.exports = orderController
