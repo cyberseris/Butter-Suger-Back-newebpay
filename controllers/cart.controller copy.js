@@ -274,7 +274,10 @@ const cartController = {
             console.log(cartItemDetails)
             console.log("==============checkout cartItemDetails=============")
 
-            const course_ids = cartItemDetails.map(item =>item.course_id)
+            const course_ids = cartItemDetails.map(item => {
+                return {course_id: item.course_id, 
+                        price: item.price}
+            })
 
             console.log("==============checkout=============")
             console.log(course_ids)
@@ -288,9 +291,9 @@ const cartController = {
             
             const order = {
                 Email: email,
-                ItemDesc: course_ids.join(','),   //course_ids.join(',')
+                ItemDesc: JSON.stringify(course_ids),   //course_ids.join(',')
                 TimeStamp,
-                Amt: summaryItems.total_price-(Number(discount_amount)||0),
+                Amt: summaryItems.total_price-discount_amount,
                 MerchantOrderNo: TimeStamp
             }
         
@@ -311,7 +314,7 @@ const cartController = {
                 user_id: user_id,
                 coupon_id: coupon_id, //escapeHtml.escape(coupon_id)
                 discount_amount: discount_amount,  //escapeHtml.escape(discount_amount)
-                final_amount: summaryItems.total_price-(Number(discount_amount)||0), //escapeHtml.escape(discount_amount)
+                final_amount: summaryItems.total_price - discount_amount, //escapeHtml.escape(discount_amount)
                 order_number: order.MerchantOrderNo,
                 payment_status: 'pending',
                 pay_trade_no: '',
@@ -336,18 +339,11 @@ const cartController = {
             console.log("==============checkout result=============")
 
 
-            const insertOrderItems = cartItemDetails.map(item => {
-                return {order_id: result.id,
-                        course_id: item.course_id, 
-                        price: item.price}
-            })
             const orderItemRepo = dataSource.getRepository('order_item')
-            const newOrderItem = orderItemRepo.create(insertOrderItems)
-            const orderItemResult = await orderItemRepo.save(newOrderItem)
-            
-            console.log("===============orderItemResult===============")
-            console.log(orderItemResult)
-            console.log("===============orderItemResult===============")
+            const newOrderItem = orderItemRepo.create({
+                order_id: String(order.MerchantOrderNo),
+                
+            })
 
             const html = `<form action="${PayGateWay}" method="post">
                         <input type="text" name="MerchantID" value="${MerchantID}" />
@@ -398,25 +394,15 @@ const cartController = {
                 message: "付款失敗"
             })
         } 
-        const payment_status =  data.Status==='SUCCESS'?'paid':'failed'
-        const orderRepo = dataSource.getRepository('order')
-        const updateOrder = await orderRepo.update({order_number: MerchantOrderNo}, {
-            payway: data.Result.PaymentType,
-            payment_status: payment_status,
-            payment_date: data.Result.PayTime,
-            pay_trade_no: data.Result.TradeNo,
-            pay_rtn_msg: JSON.stringify(data.Result)
-            }
-        )
-
+    
         console.log("============newebpay_notify Result============")
         console.log(data?.Result)
         console.log("============newebpay_notify Result============")
 
         console.log("============newebpay_notify 更新 order============")
-        console.log(updateOrder)
-        console.log("============newebpay_notify 更新 order============")
         
+
+    
         return  res.status(200).json({
             status:true,
             message: "結帳成功",
