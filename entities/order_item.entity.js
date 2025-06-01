@@ -25,5 +25,27 @@ module.exports = new EntitySchema({
             type: 'timestamp',
             createDate: true,
         }
+    },
+    relations: {
+        order: {
+            target: 'order',
+            type: 'many-to-one',
+            inverseSide: 'order_item',
+            joinColumn: {
+                name: 'order_id',
+                referencedColumnName: 'id',
+                foreignKeyConstraintName: 'order_item_order_id_fk'
+            }
+        },
+        courses: {
+            target: 'courses',
+            type: 'many-to-one',
+            inverseSide: 'order_item',
+            joinColumn: {
+                name: 'course_id',
+                referencedColumnName: 'id',
+                foreignKeyConstraintName: 'order_item_courses_id_fk'
+            }
+        }
     }
 })
