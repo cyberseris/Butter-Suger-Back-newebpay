@@ -400,8 +400,6 @@ const cartController = {
         console.log("============newebpayReturn data findOrder============")
 
         const orderItemRepo = dataSource.getRepository('order_item')
-        const item_count = await orderItemRepo.count({ order_id:order_id })
-/*         const item_count = orderItems.length */
         const result = await orderItemRepo.createQueryBuilder('orderItem')
         .select([
             'course.course_smallimage AS course_smallimage',
@@ -426,7 +424,7 @@ const cartController = {
                     "payment_date": data.Result.PayTime,
                     "order_number": data.Result.MerchantOrderNo,
                     "order_items": result,
-                    "item_count": item_count
+                    "item_count": result.length
                 }
         })
     },
