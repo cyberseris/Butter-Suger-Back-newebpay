@@ -290,7 +290,7 @@ const cartController = {
                 Email: email,
                 ItemDesc: course_ids.join(','),
                 TimeStamp,
-                Amt: summaryItems.total_price,
+                Amt: summaryItems.total_price-discount_amount,
                 MerchantOrderNo: TimeStamp
             }
         
@@ -370,6 +370,11 @@ const cartController = {
     async newebpayNotify(req, res, next){
         const response = req.body
         const data = createAesDecrypt(response.TradeInfo)
+
+        console.log("============newebpay_notify data============")
+        console.log(data)
+        console.log("============newebpay_notify data============")
+
         const thisShaEncrypt = createShaEncrypt(response.TradeInfo)
     
         if(!thisShaEncrypt === response.TradeSha){
@@ -380,13 +385,11 @@ const cartController = {
             })
         } 
     
-        console.log("============newebpay_notify============")
+        console.log("============newebpay_notify Result============")
         console.log(data?.Result)
-        console.log("============newebpay_notify============")
+        console.log("============newebpay_notify Result============")
 
-        console.log("============newebpay_notify============")
-        console.log(data)
-        console.log("============newebpay_notify============")
+
     
         return  res.status(200).json({
             status:true,
