@@ -400,7 +400,7 @@ const cartController = {
         } 
         const payment_status =  data.Status==='SUCCESS'?'paid':'failed'
         const orderRepo = dataSource.getRepository('order')
-        const updateOrder = await orderRepo.update({order_number: MerchantOrderNo}, {
+        const updateOrder = await orderRepo.update({order_number: data.Result.MerchantOrderNo}, {
             payway: data.Result.PaymentType,
             payment_status: payment_status,
             payment_date: data.Result.PayTime,
