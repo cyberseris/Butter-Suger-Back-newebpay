@@ -12,12 +12,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/v1/courses/course-category",
+					"raw": "http://butter-sugar.zeabur.app/api/v1/courses/course-category",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"butter-sugar",
+						"zeabur",
+						"app"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -43,12 +44,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/courses/course-category",
+					"raw": "http://butter-sugar.zeabur.app/api/v1/courses/course-category",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"butter-sugar",
+						"zeabur",
+						"app"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -65,12 +67,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/v1/courses/fbb34f39-fd43-4cdb-b9a1-163964cc245e",
+					"raw": "http://butter-sugar.zeabur.app/api/v1/courses/fbb34f39-fd43-4cdb-b9a1-163964cc245e",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"butter-sugar",
+						"zeabur",
+						"app"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -88,7 +91,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "  {\r\n    \"teacher_id\": \"374b3a59-30c9-4aef-8341-6fdc2aa7ee55\",\r\n    \"category_id\": \"d782ce05-fa1e-4cd1-9ab8-91bbe4fca583\",\r\n    \"course_name\": \"麵包烘焙設備與材料選擇\",\r\n    \"course_banner_imageUrl\": \"https://cdn.butterandsugar.com/courses/bread7.jpg\",\r\n    \"course_banner_description\": \"介紹麵包烘焙中常用設備與原料選擇要點\",\r\n    \"course_description\": \"包含烤箱、攪拌機、酵母及麵粉等材料解析\",\r\n    \"course_description_image\": [],\r\n    \"course_smallimage\": \"https://cdn.butterandsugar.com/courses/bread7_small.jpg\",\r\n    \"course_hours\": 8,\r\n    \"total_users\": 260,\r\n    \"trailer_vimeo_id\": \"breadCourse-000007\",\r\n    \"trailer_name\": \"設備材料介紹\",\r\n    \"trailer_url\": \"https://vimeo.com/bread007.mp4\",\r\n    \"trailer_status\": \"ready\",\r\n    \"handout_name\": \"設備與材料講義\",\r\n    \"handout_url\": \"https://butterandsugar.com/handouts/bread7.pdf\",\r\n    \"suitable_for\": \"所有人\",\r\n    \"course_goal\": \"了解烘焙設備及材料，提升麵包品質\",\r\n    \"origin_price\": 3200,\r\n    \"sell_price\": 2900,\r\n    \"course_status\": \"上架\"\r\n  }",
+					"raw": "{\r\n  \"teacher_id\": \"d02366a9-0c2d-480a-9685-bce659a2e079\",\r\n  \"category_id\": \"0e07a888-40a4-4338-9aed-4c38d6921ceb\",\r\n  \"course_name\": \"香酥療癒！手工餅乾多款變化製作指南\",\r\n  \"course_banner_imageUrl\": \"https://cdn.butterandsugar.com/courses/img1.jpg\",\r\n  \"course_banner_description\": \"教你做出入口酥鬆、香氣撲鼻的各式餅乾，從基本奶油餅乾到變化款式一次學會！\",\r\n  \"course_description\": \"本課程將帶你從基本奶油餅乾配方開始，深入學習巧克力豆餅乾、抹茶餅乾、燕麥餅乾等不同風味的製作方法，包含食材比例、打發技巧、烘烤火候與保存方式，讓你輕鬆做出專業水準的療癒餅乾。\",\r\n  \"course_description_image\": [],\r\n  \"course_smallimage\": \"https://cdn.butterandsugar.com/courses/img1.jpg\",\r\n  \"course_hours\": 10.5,\r\n  \"total_users\": 1025,\r\n  \"trailer_vimeo_id\": \"butterSugar-00000001\",\r\n  \"trailer_name\": \"入門影片\",\r\n  \"trailer_url\": \"https://vimeo.com/ijk3456lmno7.mp4\",\r\n  \"trailer_status\": \"ready\",\r\n  \"handout_name\": \"課程講義\",\r\n  \"handout_url\": \"https://butterandsugar.com/handouts/handout1.pdf\",\r\n  \"suitable_for\": \"所有人\",\r\n  \"course_goal\": \"掌握手工餅乾的製作關鍵，從餅乾口感控制到多口味變化，做出專業又有溫度的點心\",\r\n  \"origin_price\": 4200,\r\n  \"sell_price\": 3600,\r\n  \"course_status\": \"上架\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -96,12 +99,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/courses",
+					"raw": "http://butter-sugar.zeabur.app/api/v1/courses",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"butter-sugar",
+						"zeabur",
+						"app"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -117,12 +121,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/v1/courses",
+					"raw": "http://butter-sugar.zeabur.app/api/v1/courses",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"butter-sugar",
+						"zeabur",
+						"app"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -149,7 +154,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rating_score\": 3,\r\n    \"review_text\": \"裝飾步驟稍有挑戰性，但多加練習就能做出精美甜點。\"\r\n  }",
+					"raw": "{\r\n    \"rating_score\":2,\r\n    \"review_text\": \"手工餅乾很好吃，會持續練習！\"\r\n  }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -157,17 +162,18 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/courses/e228c81c-d301-472f-a4f5-1474b0c69e53/ratings",
+					"raw": "http://butter-sugar.zeabur.app/api/v1/courses/1c733528-e70f-42f6-948a-ea21abe9e36d/ratings",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"butter-sugar",
+						"zeabur",
+						"app"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
 						"courses",
-						"e228c81c-d301-472f-a4f5-1474b0c69e53",
+						"1c733528-e70f-42f6-948a-ea21abe9e36d",
 						"ratings"
 					]
 				}

@@ -343,15 +343,10 @@ const cartController = {
             })
             const orderItemRepo = dataSource.getRepository('order_item')
             const newOrderItem = orderItemRepo.create(insertOrderItems)
-            const orderItemResult = await orderItemRepo.save(newOrderItem)
+            await orderItemRepo.save(newOrderItem)
             
             await cartItemsRepo.delete({cart_id: cart_id})   
             await cartsRepo.delete({id: cart_id})
-
-
-            console.log("===============orderItemResult===============")
-            console.log(orderItemResult)
-            console.log("===============orderItemResult===============")
 
             const html = `<form action="${PayGateWay}" method="post">
                         <input type="text" name="MerchantID" value="${MerchantID}" />
