@@ -3,15 +3,6 @@ const { appError, sendResponse } = require('../utils/responseFormat')
 const cleanUndefinedFields = require('../utils/cleanUndefinedFields')
 
 const orderController = {
-    //取得單一訂單
-    async getOrder(req, res, next){
-
-        return res.status(200).json({
-            status: true,
-            message: "getOrder"
-        })
-    },
-
     //取得所有訂單
     async getOrderList(req, res, next){
         const user_id = req.user.id

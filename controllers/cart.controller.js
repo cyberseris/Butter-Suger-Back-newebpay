@@ -376,9 +376,50 @@ const cartController = {
     },
 
     async newebpayReturn(req, res, next){
-        console.log("==========newebpayReturn=========")
-        console.log(req)
-        console.log("=========newebpayReturn==========")
+        const response = req.body
+        console.log("============newebpayReturn req.body============")
+        console.log(req.body)
+        console.log("============newebpayReturn req.body============")
+
+        const data = createAesDecrypt(response.TradeInfo)
+
+        console.log("============newebpayReturn data============")
+        console.log(data)
+        console.log("============newebpayReturn data============")
+
+        if(data.status!=='SUCCESS'){
+            return res.status(200).json({
+                status:true,
+                message: "結帳失敗"
+            })           
+        }
+
+        const orderRepo = dataSource.getRepository('order')
+        const findOrder = await orderRepo.findOne({
+            select: ['id'],
+            where: { order_number: data.Result.MerchantOrderNo}
+            }
+        )
+
+        const order_id = findOrder.id
+
+        const orderItemRepo = dataSource.getRepository('order_item')
+        const result = await orderItemRepo.cartItemsRepo.createQueryBuilder('orderItem')
+        .select(['COUNT(*)::int AS item_count',
+                'course.course_smallimage AS course_smallimage',
+                'course.course_name AS course_name',
+                'course.sell_price AS price'
+                ])
+        .leftJoin('orderItem.courses', 'course')
+        .where('orderItem.id = :id', {order_id})
+        .groupBy('course.course_smallimage')
+        .addGroupBy('course.course_name')
+        .addGroupBy('course.sell_price')
+        .getRawMany()
+
+        console.log("================newebpayReturn result return==================")
+        console.log(result)
+        console.log("================newebpayReturn result return==================")
 
         return res.status(200).json({
             status:true,
