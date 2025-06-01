@@ -79,7 +79,7 @@ const userController = {
         role: findUser.role,
       })
 
-      // 傳回 JSON 給前端
+      // 傳回 JSON 給前端，token= 測試用(暫不考慮安全性)
       return res.redirect(
         `${process.env.FRONTEND_URL}/login-success.html?token=${token}&id=${findUser.id}`
       )
