@@ -410,7 +410,18 @@ const cartController = {
         console.log(result)
         console.log("================newebpayReturn result return==================")
 
-        const html = renderOrderHtml
+        const renderData = {
+            "payway": data.Result.PaymentType,
+            "final_amount": data.Result.Amt,
+            "payment_status": data.status,
+            "payment_date": data.Result.PayTime,
+            "order_number": data.Result.MerchantOrderNo,
+            "order_items": result,
+            "item_count": result.length
+        }
+
+        const html = renderOrderHtml(renderData)
+        res.send(html)
 
 /*         return res.status(200).json({
             status:true,
