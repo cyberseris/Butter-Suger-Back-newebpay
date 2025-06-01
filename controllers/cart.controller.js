@@ -3,6 +3,7 @@ const { appError, sendResponse } = require('../utils/responseFormat')
 const cleanUndefinedFields = require('../utils/cleanUndefinedFields')
 const getCartItemDetails = require('../services/cart/cartItemDetails')
 const summaryCartItems = require('../services/cart/summaryCartItems')
+const renderOrderHtml = require('../services/cart/renderOrderHtml')
 const { createAesEncrypt, createShaEncrypt, createAesDecrypt } = require('../services/checkout/checkout')
 const { In } = require('typeorm')
 const escapeHtml = require('he')  //防止 html 注入攻擊
@@ -409,7 +410,9 @@ const cartController = {
         console.log(result)
         console.log("================newebpayReturn result return==================")
 
-        return res.status(200).json({
+        const html = renderOrderHtml
+
+/*         return res.status(200).json({
             status:true,
             message: "結帳成功",
             data: {
@@ -421,7 +424,7 @@ const cartController = {
                     "order_items": result,
                     "item_count": result.length
                 }
-        })
+        }) */
     },
     async newebpayNotify(req, res, next){
         const response = req.body
