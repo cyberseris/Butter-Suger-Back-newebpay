@@ -413,7 +413,7 @@ const cartController = {
         const renderData = {
             "payway": data.Result.PaymentType,
             "final_amount": data.Result.Amt,
-            "payment_status": data.status,
+            "payment_status": data.Status,
             "payment_date": data.Result.PayTime,
             "order_number": data.Result.MerchantOrderNo,
             "order_items": result,
