@@ -387,13 +387,6 @@ const cartController = {
         console.log(data)
         console.log("============newebpayReturn data============")
 
-        if(data.status!=='SUCCESS'){
-            return res.status(200).json({
-                status:true,
-                message: "結帳失敗"
-            })           
-        }
-
         const orderRepo = dataSource.getRepository('order')
         const findOrder = await orderRepo.findOne({
             select: ['id'],
