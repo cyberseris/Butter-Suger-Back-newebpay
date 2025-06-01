@@ -11,6 +11,7 @@ const ratings = require('../entities/ratings.entity')
 const carts = require('../entities/carts.entity')
 const cart_items = require('../entities/cart_items.entity')
 const order = require('../entities/order.entity')
+const order_item = require('../entities/order_item.entity')
 const coupon = require('../entities/coupon.entity')
 const user_coupon = require('../entities/user_coupon.entity')
 
@@ -24,7 +25,7 @@ const dataSource = new DataSource({
   synchronize: config.get('db.synchronize'),
   schema: "public",
   poolSize: 10,
-  entities: [ users, courses , courseCategory , courseSection, courseSubsection , teacher, ratings, carts, cart_items, order, coupon, user_coupon],
+  entities: [ users, courses , courseCategory , courseSection, courseSubsection , teacher, ratings, carts, cart_items, order, order_item, coupon, user_coupon],
   ssl: config.get('db.ssl'),
 })
 
