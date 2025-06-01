@@ -423,7 +423,8 @@ const cartController = {
 
         return res.status(200).json({
             status:true,
-            message: "結帳成功"
+            message: "結帳成功",
+            daya: result
         })
     },
     async newebpayNotify(req, res, next){
