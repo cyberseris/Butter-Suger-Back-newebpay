@@ -70,10 +70,41 @@ router.get('/check', ...handleMiddleware([isAuth], userController.getCheck))
 /**
  * @swagger
  * /api/v1/users/update:
- *   get:
+ *   patch:
  *     summary: 編輯使用者資料
  *     tags:
  *       - Users
+*      consumes:
+ *       - multipart/form-data
+ *     parameters:
+ *       - in: formData
+ *         name: name
+ *         type: string
+ *         description: 使用者姓名
+ *       - in: formData
+ *         name: nickname
+ *         type: string
+ *         description: 暱稱
+ *       - in: formData
+ *         name: phone
+ *         type: string
+ *         description: 手機
+ *       - in: formData
+ *         name: birthday
+ *         type: string
+ *         description: 生日
+ *       - in: formData
+ *         name: sex
+ *         type: string
+ *         description: 性別
+ *       - in: formData
+ *         name: address
+ *         type: string
+ *         description: 地址
+ *       - in: formData
+ *         name: file
+ *         type: file
+ *         description: 頭像上傳（檔案）
  *     security:
  *       - BearerAuth: []
  *     responses:
