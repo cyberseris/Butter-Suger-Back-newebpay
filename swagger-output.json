@@ -10,6 +10,14 @@
   "schemes": [
     "https"
   ],
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "請填寫 Bearer token，例如: Bearer {token}"
+    }
+  },
   "paths": {
     "/api/v1/users/auth/google": {
       "get": {
@@ -775,15 +783,6 @@
             "description": ""
           }
         }
-      }
-    }
-  },
-  "components": {
-    "securitySchemes": {
-      "BearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
       }
     }
   },

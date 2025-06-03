@@ -7,14 +7,13 @@ const doc = {
   },
   host: 'butter-sugar.zeabur.app',
   schemes: ['https'],
-  components: {
-    securitySchemes: {
-      BearerAuth: {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-      },
-    },
+  securityDefinitions: {
+    BearerAuth: {
+      type: 'apiKey',
+      name: 'Authorization',
+      in: 'header',
+      description: '請填寫 Bearer token，例如: Bearer {token}'
+    }
   },
   security: [{ BearerAuth: [] }],
 };
