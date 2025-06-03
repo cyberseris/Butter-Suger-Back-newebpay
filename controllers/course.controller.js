@@ -12,6 +12,7 @@ const courseController = {
   */
 
   createCourseTitle: wrapAsync(async (req, res, next) => {
+    // #swagger.ignore = true
     const teacher_id = req.user?.id
     const { course_name } = req.body
     const courseRepo = dataSource.getRepository('courses')
@@ -24,7 +25,7 @@ const courseController = {
     * 上傳課程小圖
   */
   uploadCourseSmallImages: wrapAsync(async (req, res, next) => {
-    
+    // #swagger.ignore = true
     if (!req.files || req.files.length === 0) {
       return next(appError(400, '請上傳圖片'))
     }
@@ -40,6 +41,7 @@ const courseController = {
     * 上傳課程描述圖片
   */
   uploadCourseDescriptionImages: wrapAsync(async (req, res, next) => {
+    // #swagger.ignore = true
     if (!req.files || req.files.length === 0) {
       return next(appError(400, '請上傳圖片'))
     }
@@ -55,6 +57,7 @@ const courseController = {
     * 上傳課程 Banner 圖片
   */
   uploadCourseBanner: wrapAsync(async (req, res, next) => {
+    // #swagger.ignore = true
     const courseId = req.params.course_id
     if (!req.file || !courseId) {
       return next(appError(400, '請上傳圖片與課程 ID'))
@@ -74,6 +77,7 @@ const courseController = {
     * 上傳課程教材
   */
   uploadCourseMaterials: wrapAsync(async (req, res, next) => {
+    // #swagger.ignore = true
     if (!req.files || req.files.length === 0) {
       return next(appError(400, '請上傳檔案'))
     }
@@ -110,7 +114,6 @@ const courseController = {
   
     // 測試用，塞類別資料，非正式格式
     async getCategory(req, res, next) {
-      
       const categoryRepo = dataSource.getRepository('course_category')
   
       const findCategory = await categoryRepo.find({

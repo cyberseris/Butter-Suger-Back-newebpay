@@ -372,6 +372,7 @@ const cartController = {
     },
 
     async newebpayReturn(req, res, next){
+        // #swagger.ignore = true
         const response = req.body
         console.log("============newebpayReturn req.body============")
         console.log(req.body)
@@ -439,6 +440,7 @@ const cartController = {
         }) */
     },
     async newebpayNotify(req, res, next){
+        // #swagger.ignore = true
         const response = req.body
         const data = createAesDecrypt(response.TradeInfo)
 
