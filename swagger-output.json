@@ -11,16 +11,6 @@
     "http"
   ],
   "paths": {
-    "/healthcheck": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/v1/users/auth/google": {
       "get": {
         "description": "",

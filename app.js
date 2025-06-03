@@ -78,11 +78,6 @@ app.use('/api/v1/cart', cartRouter)
 app.use('/api/v1/order', orderRouter)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// 健康檢查路由
-app.get('/healthcheck', (req, res) => {
-  res.status(200).send('OK')
-})
-
 // 讓錯誤處理 middleware 做全域錯誤處理
 app.use(errorHandler)
 
