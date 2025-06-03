@@ -420,6 +420,7 @@ const cartController = {
             "item_count": result.length
         }
 
+        console.log("=================================")
         const html = renderOrderHtml(renderData)
         res.send(html)
 

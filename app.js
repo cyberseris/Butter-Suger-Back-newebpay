@@ -14,6 +14,9 @@ require('dotenv').config()
 // 引入 passport 配置
 const passport = require('./config/passport')
 const session = require('express-session')
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger-output.json');
+
 
 const app = express()
 app.use(cors())
@@ -73,6 +76,7 @@ app.use('/api/v1/course', courseRoutes)
 app.use('/api/v1/courses', coursesRouter)
 app.use('/api/v1/cart', cartRouter)
 app.use('/api/v1/order', orderRouter)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // 健康檢查路由
 app.get('/healthcheck', (req, res) => {
