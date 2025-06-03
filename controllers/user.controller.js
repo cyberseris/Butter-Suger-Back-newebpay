@@ -7,6 +7,7 @@ const storage = require('../services/storage')
 const userController = {
   // 取得 google 基本資料
   async getGoogleProfile(req, res, next) {
+    // #swagger.ignore = true
     try {
       // 確保 passport 已帶入 user 資料
       if (!req.user || !req.user.id) {
@@ -217,7 +218,7 @@ const userController = {
         return next(appError(404, '查無個人資料，請重新登入'))
       }
 
-      return sendResponse(res, 200, true, '更新使用者資料成功')
+      return sendResponse(res, 200, true, '成功更新使用者資料')
     } catch (error) {
       return next(error)
     }

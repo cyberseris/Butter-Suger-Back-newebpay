@@ -6,7 +6,17 @@ const doc = {
     description: 'Description'
   },
   host: 'butter-sugar.zeabur.app',
-  schemes: ['https']
+  schemes: ['https'],
+  components: {
+    securitySchemes: {
+      BearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+    },
+  },
+  security: [{ BearerAuth: [] }],
 };
 
 const outputFile = './swagger-output.json';
