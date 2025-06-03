@@ -8,7 +8,7 @@
   "host": "butter-sugar.zeabur.app",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/api/v1/users/auth/google": {

@@ -5,7 +5,8 @@ const doc = {
     title: 'My API',
     description: 'Description'
   },
-  host: 'butter-sugar.zeabur.app'
+  host: 'butter-sugar.zeabur.app',
+  schemes: ['https']
 };
 
 const outputFile = './swagger-output.json';
