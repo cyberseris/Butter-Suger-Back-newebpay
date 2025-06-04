@@ -2,10 +2,10 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
   info: {
-    title: 'My API',
+    title: 'Butter & Sugar',
     description: 'Description'
   },
-  host: 'butter-sugar.zeabur.app',
+  host: 'butter-sugar.zeabur.app',  //host: 'butter-sugar.zeabur.app',
   schemes: ['https'],
   securityDefinitions: {
     BearerAuth: {
