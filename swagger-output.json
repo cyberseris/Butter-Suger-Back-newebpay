@@ -36,13 +36,6 @@
         "tags": ["User"],
         "summary": "驗證使用者是否登入",
         "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -58,11 +51,6 @@
           "multipart/form-data"
         ],
         "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
           {
             "name": "name",
             "in": "formData",
@@ -524,22 +512,22 @@
       "get": {
         "tags": ["Courses"],
         "summary": "取得課程分類列表(測試用)",
-      "description": "取得所有課程分類（如麵包、蛋糕、餅乾等）",
-        "responses": {
-          "200": {
-            "description": "成功取得分類清單",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": { "type": "string", "example": "aabbccdd-1122-3344-5566-77889900" },
-                  "name": { "type": "string", "example": "麵包" }
+        "description": "取得所有課程分類（如麵包、蛋糕、餅乾等）",
+          "responses": {
+            "200": {
+              "description": "成功取得分類清單",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string", "example": "aabbccdd-1122-3344-5566-77889900" },
+                    "name": { "type": "string", "example": "麵包" }
+                  }
                 }
               }
             }
           }
-        }
       },
       "post": {
         "tags": ["Courses"],

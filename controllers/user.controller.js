@@ -167,12 +167,9 @@ const userController = {
 
   // 更新使用者資料
   async updateUserData(req, res, next) {
-    console.log("=======updateUserData======")
-    console.log(req.file)
-    console.log("=======updateUserData======")
     try {
       const userId = req.user.id
-      const { nickname, name, phone, birthday, sex, address } = req.body
+      const { name, nickname, phone, birthday, sex, address } = req.body
 
       const userRepo = dataSource.getRepository('users')
 
@@ -184,8 +181,7 @@ const userController = {
       if (!findUser) {
         return next(appError(404, '查無個人資料，請重新登入'))
       }
-
-      
+ 
       // 清理未定義的欄位
       const updateData = cleanUndefinedFields({
         name,
@@ -194,8 +190,7 @@ const userController = {
         birthday,
         sex,
         address,
-        profile_image_url: findUser.profile_image_url
-        /* profile_image_url: req.file ? req.file?.path : findUser.profile_image_url, */
+        profile_image_url: findUser.profile_image_url || ''  //後面會判斷 req.file
       })
 
 
