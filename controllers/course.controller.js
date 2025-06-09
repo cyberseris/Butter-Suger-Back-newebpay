@@ -177,7 +177,7 @@ const courseController = {
       const courseRepo = dataSource.getRepository('courses')
       const findCourse = await courseRepo.findOne({
         where: {id: courseId},
-        select: ['teacher_id','category_id','course_banner_imageUrl','course_name','course_banner_description','course_description','course_description_image','course_hours','course_smallimage','total_users','trailer_vimeo_id','trailer_name','trailer_url','trailer_status','handout_name','handout_url','suitable_for','course_goal','origin_price','sell_price','course_status']
+        select: ['id','teacher_id','category_id','course_banner_imageUrl','course_name','course_banner_description','course_description','course_description_image','course_hours','course_smallimage','total_users','trailer_vimeo_id','trailer_name','trailer_url','trailer_status','handout_name','handout_url','suitable_for','course_goal','origin_price','sell_price','course_status']
       })
   
       return sendResponse(res, 200, true, '取得資料成功', findCourse)
