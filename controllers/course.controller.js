@@ -187,7 +187,7 @@ const courseController = {
     async getCourseList(req, res, next) {
       const courseRepo = dataSource.getRepository('courses')
       const findCourseList = await courseRepo.find({
-        select: ['teacher_id','category_id','course_name','course_banner_imageUrl','course_banner_description','course_description','course_description_image','course_smallimage','course_hours','total_users','trailer_vimeo_id','trailer_name','trailer_url','trailer_status','handout_name','handout_url','suitable_for','course_goal','origin_price','sell_price','course_status']
+        select: ['id','teacher_id','category_id','course_name','course_banner_imageUrl','course_banner_description','course_description','course_description_image','course_smallimage','course_hours','total_users','trailer_vimeo_id','trailer_name','trailer_url','trailer_status','handout_name','handout_url','suitable_for','course_goal','origin_price','sell_price','course_status']
       })
   
       return sendResponse(res, 200, true, '取得資料成功', findCourseList)
